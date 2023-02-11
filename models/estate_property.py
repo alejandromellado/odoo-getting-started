@@ -36,6 +36,10 @@ class EstateProperty(models.Model):
         ],
     )
 
+    # Other Info
+    salesperson_id = fields.Many2one('res.users', default=lambda self: self.env.user, string='Salesman')
+    buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)
+
     active = fields.Boolean(default=True)
     state = fields.Selection(
         required=True,
