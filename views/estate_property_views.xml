@@ -32,7 +32,8 @@
                     <h1>
                         <field name="name"/>
                     </h1>
-                    <br/>
+                    <field name="tag_ids" widget="many2many_tags"/>
+                    <br/><br/>
                     <group>
                         <group>
                             <field name="property_type_id"/>
