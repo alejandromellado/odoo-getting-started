@@ -9,9 +9,10 @@
             <form string="Estate Property">
                 <sheet>
                     <group>
-                        <field name="partner_id"/>
-                        <field name="property_id"/>
                         <field name="price"/>
+                        <field name="partner_id"/>
+                        <field name="validity"/>
+                        <field name="date_deadline"/>
                         <field name="status"/>
                     </group>
                 </sheet>
@@ -27,6 +28,8 @@
             <tree string="Offer">
                 <field name="price"/>
                 <field name="partner_id"/>
+                <field name="validity"/>
+                <field name="date_deadline"/>
                 <field name="status"/>
             </tree>
         </field>

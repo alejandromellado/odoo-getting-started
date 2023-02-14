@@ -1,6 +1,6 @@
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from odoo import models, fields
+from odoo import models, fields, api
 
 
 class EstateProperty(models.Model):
@@ -37,6 +37,22 @@ class EstateProperty(models.Model):
         ],
     )
 
+    @api.onchange('garden')
+    def _onchange_garden(self):
+        if self.garden:
+            self.garden_area = 10
+            self.garden_orientation = 'north'
+        else:
+            self.garden_area = 0
+            self.garden_orientation = ''
+
+    @api.depends('living_area', 'garden_area')
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
+
+    total_area = fields.Integer(string='Total Area (sqm)', compute='_compute_total_area')
+
     # Other Info
     salesperson_id = fields.Many2one('res.users', default=lambda self: self.env.user, string='Salesman')
     buyer_id = fields.Many2one('res.partner', string='Buyer', copy=False)
@@ -44,6 +60,17 @@ class EstateProperty(models.Model):
     # Offers
     offer_ids = fields.One2many('estate.property.offer', 'property_id', string='Offers')
 
+    @api.depends('offer_ids.price')
+    def _compute_best_price(self):
+        for record in self:
+            if record.offer_ids:
+                record.best_price = max(record.offer_ids.mapped('price'))
+                continue
+            record.best_price = 0
+
+    best_price = fields.Float(string='Best Offer', compute='_compute_best_price')
+
+    # Additional
     active = fields.Boolean(default=True)
     state = fields.Selection(
         required=True,
