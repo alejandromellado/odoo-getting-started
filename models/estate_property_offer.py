@@ -1,11 +1,13 @@
 from dateutil.relativedelta import relativedelta
 from odoo import models, fields, api
+from odoo.exceptions import UserError
 
 
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'An amount a potential buyer offers to the seller for a property.'
 
+    # Status
     price = fields.Float()
     status = fields.Selection(
         copy=False,
@@ -16,6 +18,23 @@ class EstatePropertyOffer(models.Model):
     )
     partner_id = fields.Many2one('res.partner', required=True, string='Partner')
     property_id = fields.Many2one('estate.property', required=True, string='Property')
+
+    def action_accept_offer(self):
+        for record in self:
+            property_record = record.property_id
+            if property_record.state == 'offer_accepted':
+                raise UserError('An offer has already been accepted.')
+            record.status = 'accepted'
+            # Update related property listing
+            property_record.state = 'offer_accepted'
+            property_record.selling_price = record.price
+            property_record.buyer_id = record.partner_id
+        return True
+
+    def action_refuse_offer(self):
+        for record in self:
+            record.status = 'refused'
+        return True
 
     # Deadline
     create_date = fields.Datetime()
