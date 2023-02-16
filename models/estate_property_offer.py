@@ -24,11 +24,13 @@ class EstatePropertyOffer(models.Model):
             property_record = record.property_id
             if property_record.state == 'offer_accepted':
                 raise UserError('An offer has already been accepted.')
-            record.status = 'accepted'
+
             # Update related property listing
-            property_record.state = 'offer_accepted'
             property_record.selling_price = record.price
             property_record.buyer_id = record.partner_id
+            property_record.state = 'offer_accepted'
+
+            record.status = 'accepted'
         return True
 
     def action_refuse_offer(self):
