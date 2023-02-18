@@ -30,8 +30,8 @@
                 <field name="partner_id"/>
                 <field name="validity"/>
                 <field name="date_deadline"/>
-                <button name="action_accept_offer" type="object" class="btn fa fa-check" string="" title="Accept" aria-label="Accept"/>
-                <button name="action_refuse_offer" type="object" class="btn fa fa-times" string="" title="Refuse" aria-label="Refuse"/>
+                <button name="action_accept_offer" type="object" class="btn fa fa-check" string="" title="Accept" aria-label="Accept" attrs="{'invisible': ['|', ('status', '=', 'accepted'), ('status', '=', 'refused')] }"/>
+                <button name="action_refuse_offer" type="object" class="btn fa fa-times" string="" title="Refuse" aria-label="Refuse" attrs="{'invisible': ['|', ('status', '=', 'accepted'), ('status', '=', 'refused')] }"/>
                 <field name="status"/>
             </tree>
         </field>
