@@ -25,14 +25,14 @@
         <field name="name">estate.property.offer.tree</field>
         <field name="model">estate.property.offer</field>
         <field name="arch" type="xml">
-            <tree string="Offer" editable="bottom">
+            <tree string="Offer" editable="bottom" decoration-success="status=='accepted'" decoration-danger="status=='refused'">
                 <field name="price"/>
                 <field name="partner_id"/>
                 <field name="validity"/>
                 <field name="date_deadline"/>
                 <button name="action_accept_offer" type="object" class="btn fa fa-check" string="" title="Accept" aria-label="Accept" attrs="{'invisible': ['|', ('status', '=', 'accepted'), ('status', '=', 'refused')] }"/>
                 <button name="action_refuse_offer" type="object" class="btn fa fa-times" string="" title="Refuse" aria-label="Refuse" attrs="{'invisible': ['|', ('status', '=', 'accepted'), ('status', '=', 'refused')] }"/>
-                <field name="status"/>
+                <field name="status" invisible="1"/>
             </tree>
         </field>
     </record>
