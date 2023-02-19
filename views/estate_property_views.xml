@@ -6,15 +6,7 @@
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
             <search string="Estate Property">
-                <field name="name"/>
-                <field name="postcode"/>
-                <field name="expected_price"/>
-                <field name="bedrooms"/>
-                <field name="living_area"/>
-                <field name="facades"/>
-                <separator/>
-                <filter string="Available" name="available_filter"
-                        domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
+                <filter string="Available" name="available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
                 <group expand="1" string="Group By">
                     <filter string="Postcode" name="postcode_group" context="{'group_by':'postcode'}"/>
                 </group>
@@ -69,7 +61,7 @@
                             </group>
                         </page>
                         <page string="Offers">
-                            <field name="offer_ids" attrs="{'readonly': ['|', ('state', '=', 'sold'), '|', ('state', '=', 'offer_accepted'), ('state', '=', 'canceled')] }"/>
+                            <field name="offer_ids" attrs="{'readonly': ['|', ('state', '=', 'sold'), '|', ('state', '=', 'offer_accepted'), ('state', '=', 'canceled')]}"/>
                         </page>
                         <page string="Other Info">
                             <br/>
