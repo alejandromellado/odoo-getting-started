@@ -6,6 +6,7 @@ from odoo.exceptions import UserError
 class EstatePropertyOffer(models.Model):
     _name = 'estate.property.offer'
     _description = 'An amount a potential buyer offers to the seller for a property.'
+    _order = "price desc"
 
     # Status
     price = fields.Float()
@@ -18,11 +19,12 @@ class EstatePropertyOffer(models.Model):
     )
     partner_id = fields.Many2one('res.partner', required=True, string='Partner')
     property_id = fields.Many2one('estate.property', required=True, string='Property')
+    property_type_id = fields.Many2one(related='property_id.property_type_id', store=True)
 
     def action_accept_offer(self):
         for record in self:
             property_record = record.property_id
-            if property_record.state == 'offer_accepted':
+            if property_record.state == 'offer_accepted' or property_record.state == 'sold':
                 raise UserError('An offer has already been accepted.')
 
             # Update related property listing

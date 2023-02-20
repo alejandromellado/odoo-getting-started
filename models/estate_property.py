@@ -7,6 +7,7 @@ from odoo.exceptions import UserError, ValidationError
 class EstateProperty(models.Model):
     _name = 'estate.property'
     _description = 'An estate property listing.'
+    _order = "id desc"
 
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
@@ -110,8 +111,8 @@ class EstateProperty(models.Model):
     def _check_selling_price(self):
         for record in self:
             if fields.float_is_zero(record.selling_price, precision_digits=2):
-                # No offer has been accepted yet, no need to enforce.
-                return
+                # No offer has been accepted yet
+                continue
             if fields.float_compare(record.selling_price, record.expected_price * .90, precision_digits=2) < 0:
                 if record.state == 'offer_accepted':
                     message = 'The selling price must be at least 90% of the expected price!'
