@@ -9,6 +9,16 @@ class EstateProperty(models.Model):
     _description = 'An estate property listing.'
     _order = "id desc"
 
+    # Lifecycle
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_if_new_or_cancelled(self):
+        for record in self:
+            if record.state not in ["new", "canceled"]:
+                raise UserError("Only new or canceled records can be deleted.")
+
+    # Attributes
+
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
     property_type_id = fields.Many2one('estate.property.type', string='Property Type')
     name = fields.Char(required=True, string='Title')
