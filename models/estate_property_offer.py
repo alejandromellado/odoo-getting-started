@@ -8,6 +8,17 @@ class EstatePropertyOffer(models.Model):
     _description = 'An amount a potential buyer offers to the seller for a property.'
     _order = "price desc"
 
+    # Lifecycle
+
+    @api.model
+    def create(self, vals):
+        property_record = self.env["estate.property"].browse(vals["property_id"])
+        if fields.float_compare(vals['price'], property_record.best_price, precision_digits=2) < 0:
+            raise UserError(f"The offer must be higher than {property_record.best_price}")
+        if property_record.state == "new":
+            property_record.state = "offer_received"
+        return super().create(vals)
+
     # Status
     price = fields.Float()
     status = fields.Selection(
