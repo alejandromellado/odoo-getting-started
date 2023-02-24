@@ -35,7 +35,7 @@ class EstatePropertyOffer(models.Model):
     def action_accept_offer(self):
         for record in self:
             property_record = record.property_id
-            if property_record.state == 'offer_accepted' or property_record.state == 'sold':
+            if property_record.state in ['offer_accepted', 'sold']:
                 raise UserError('An offer has already been accepted.')
 
             # Update related property listing
