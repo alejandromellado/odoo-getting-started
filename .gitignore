@@ -1,2 +1,16 @@
 .idea
 __pycache__
+.bandit
+.editorconfig
+.eslintrc.json
+.flake8
+.flake8-optional
+.isort.cfg
+.pre-commit-config-autofix.yaml
+.pre-commit-config-optional.yaml
+.pre-commit-config.yaml
+.prettierrc.yml
+.pylintrc
+.pylintrc-optional
+doc8.ini
+pyproject.toml
