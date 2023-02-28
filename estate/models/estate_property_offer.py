@@ -13,6 +13,8 @@ class EstatePropertyOffer(models.Model):
     @api.model
     def create(self, vals):
         property_record = self.env["estate.property"].browse(vals["property_id"])
+        if property_record.state == 'sold':
+            raise UserError('You cannot create an offer for a sold property.')
         if fields.float_compare(vals['price'], property_record.best_price, precision_digits=2) < 0:
             raise UserError(f"The offer must be higher than {property_record.best_price}")
         if property_record.state == "new":
