@@ -13,5 +13,9 @@
         'views/salesperson_views.xml',
         'data/estate.property.type.csv',
     ],
+    'demo': [
+        'demo/estate_property.xml',
+        'demo/estate_property_offer.xml',
+    ],
     'application': True,
 }
