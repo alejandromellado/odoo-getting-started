@@ -122,7 +122,7 @@
         <field name="name">estate.property.tree</field>
         <field name="model">estate.property</field>
         <field name="arch" type="xml">
-            <tree string="Property" decoration-success="state in ['offer_received', 'offer_accepted']"
+            <tree decoration-success="state in ['offer_received', 'offer_accepted']"
                   decoration-bf="state=='offer_accepted'" decoration-muted="state=='sold'">
                 <field name="name"/>
                 <field name="postcode"/>

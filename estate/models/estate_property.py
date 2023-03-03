@@ -1,6 +1,6 @@
 from datetime import date
 from dateutil.relativedelta import relativedelta
-from odoo import models, fields, api
+from odoo import _, models, fields, api
 from odoo.exceptions import UserError, ValidationError
 
 
@@ -15,7 +15,7 @@ class EstateProperty(models.Model):
     def _unlink_if_new_or_cancelled(self):
         for record in self:
             if record.state not in ["new", "canceled"]:
-                raise UserError("Only new or canceled records can be deleted.")
+                raise UserError(_('Only new or canceled records can be deleted.'))
 
     # Attributes
 
@@ -40,7 +40,6 @@ class EstateProperty(models.Model):
     garden = fields.Boolean()
     garden_area = fields.Integer(string='Garden Area (sqm)')
     garden_orientation = fields.Selection(
-        string='Garden Orientation',
         selection=[
             ('north', 'North'),
             ('south', 'South'),
@@ -100,7 +99,7 @@ class EstateProperty(models.Model):
     def action_cancel_property(self):
         for record in self:
             if record.state == 'sold':
-                raise UserError('A sold property cannot be canceled.')
+                raise UserError(_('A sold property cannot be canceled.'))
             record.state = 'canceled'
         return True
 

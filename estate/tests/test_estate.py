@@ -65,4 +65,3 @@ class EstateTestCase(TransactionCase):
             prop.garden = False
             self.assertEqual(prop.garden_area, 0)
             self.assertIs(prop.garden_orientation, False)
-

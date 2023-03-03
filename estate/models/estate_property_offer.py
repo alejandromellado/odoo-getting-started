@@ -1,5 +1,5 @@
 from dateutil.relativedelta import relativedelta
-from odoo import models, fields, api
+from odoo import _, models, fields, api
 from odoo.exceptions import UserError
 
 
@@ -14,7 +14,7 @@ class EstatePropertyOffer(models.Model):
     def create(self, vals):
         property_record = self.env["estate.property"].browse(vals["property_id"])
         if property_record.state == 'sold':
-            raise UserError('You cannot create an offer for a sold property.')
+            raise UserError(_('You cannot create an offer for a sold property.'))
         if fields.float_compare(vals['price'], property_record.best_price, precision_digits=2) < 0:
             raise UserError(f"The offer must be higher than {property_record.best_price}")
         if property_record.state == "new":
@@ -38,7 +38,7 @@ class EstatePropertyOffer(models.Model):
         for record in self:
             property_record = record.property_id
             if property_record.state in ['offer_accepted', 'sold']:
-                raise UserError('An offer has already been accepted.')
+                raise UserError(_('An offer has already been accepted.'))
 
             # Update related property listing
             property_record.selling_price = record.price

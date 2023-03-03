@@ -1,5 +1,8 @@
 {
     'name': 'Real Estate',
+    'category': 'Real Estate/Brokerage',
+    'author': 'Vauxoo',
+    'license': 'LGPL-3',
     'depends': [
         'base',
     ],

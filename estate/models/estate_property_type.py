@@ -6,7 +6,7 @@ class EstatePropertyType(models.Model):
     _description = 'Represents the type of property that is listed.'
     _order = "sequence, name"
 
-    sequence = fields.Integer('Sequence', default=1, help="Used to order stages. Lower is better.")
+    sequence = fields.Integer(default=1, help="Used to order stages. Lower is better.")
     name = fields.Char(required=True)
     property_ids = fields.One2many('estate.property', 'property_type_id')
     offer_ids = fields.One2many('estate.property.offer', 'property_type_id')
