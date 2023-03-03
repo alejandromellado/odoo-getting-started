@@ -1,27 +1,28 @@
 <odoo>
 
+    <!-- Villa Offers and Offer Status -->
     <record id="offer_azure_villa_1" model="estate.property.offer">
-        <field name="property_id" ref="villa"/>
-        <field name="partner_id" ref="base.res_partner_12"/>
         <field name="price">10000</field>
-        <field name="date_deadline" eval="str(datetime.today() + relativedelta(days=+7))"/>
         <field name="validity">14</field>
+        <field name="partner_id" ref="base.res_partner_12"/>
+        <field name="property_id" ref="villa"/>
+        <field name="date_deadline" eval="str(datetime.now().year)+'-01-31'"/>
     </record>
 
     <record id="offer_azure_villa_2" model="estate.property.offer">
-        <field name="property_id" ref="villa"/>
-        <field name="partner_id" ref="base.res_partner_12"/>
         <field name="price">1500000</field>
-        <field name="date_deadline" eval="str(datetime.today() + relativedelta(days=+13))"/>
         <field name="validity">14</field>
+        <field name="partner_id" ref="base.res_partner_12"/>
+        <field name="property_id" ref="villa"/>
+        <field name="date_deadline" eval="str(datetime.now().year)+'-02-11'"/>
     </record>
 
     <record id="offer_deco_villa" model="estate.property.offer">
-        <field name="property_id" ref="villa"/>
-        <field name="partner_id" ref="base.res_partner_2"/>
         <field name="price">1500001</field>
-        <field name="date_deadline" eval="str(datetime.today() + relativedelta(days=+5))"/>
         <field name="validity">14</field>
+        <field name="partner_id" ref="base.res_partner_2"/>
+        <field name="property_id" ref="villa"/>
+        <field name="date_deadline" eval="str(datetime.now().year)+'-02-12'"/>
     </record>
 
     <function model="estate.property.offer" name="action_accept_offer">
@@ -31,5 +32,27 @@
     <function model="estate.property.offer" name="action_refuse_offer">
         <value eval="[ref('offer_azure_villa_1'), ref('offer_azure_villa_2')]"/>
     </function>
+
+    <function model="estate.property" name="action_sold_property">
+        <value eval="[ref('villa')]"/>
+    </function>
+
+
+    <!-- Cabin Offers and Offer Status -->
+    <record id="offer_cabin_1" model="estate.property.offer">
+        <field name="price">60000</field>
+        <field name="validity">14</field>
+        <field name="partner_id" ref="base.res_partner_12"/>
+        <field name="property_id" ref="cabin"/>
+        <field name="date_deadline" eval="str(datetime.now().year)+'-02-12'"/>
+    </record>
+
+    <record id="offer_cabin_2" model="estate.property.offer">
+        <field name="price">75000</field>
+        <field name="validity">14</field>
+        <field name="partner_id" ref="base.res_partner_12"/>
+        <field name="property_id" ref="cabin"/>
+        <field name="date_deadline" eval="str(datetime.now().year)+'-02-12'"/>
+    </record>
 
 </odoo>

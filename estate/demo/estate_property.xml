@@ -15,10 +15,11 @@
         <field name="garden_area">100000</field>
         <field name="garden_orientation">south</field>
         <field name="property_type_id" ref="property_residential"/>
+        <field name="salesperson_id" ref="base.user_admin"/>
     </record>
 
     <record id="trailer" model="estate.property">
-        <field name="name">Trailer home</field>
+        <field name="name">Trailer Home</field>
         <field name="state">canceled</field>
         <field name="description">Home in a trailer park</field>
         <field name="postcode">54321</field>
@@ -29,24 +30,36 @@
         <field name="living_area">10</field>
         <field name="facades">4</field>
         <field name="garage">False</field>
+        <field name="garden">True</field>
         <field name="property_type_id" ref="property_residential"/>
+        <field name="salesperson_id" ref="base.user_admin"/>
     </record>
 
-    <!-- This kept adding records everytime the server was run. -->
-    <!--<record id="new_property" model="estate.property">
-        <field name="name">House in Hermosillo</field>
+    <record id="space_ship" model="estate.property">
+        <field name="name">International Space Station</field>
         <field name="state">new</field>
-        <field name="description">A home in Hermosillo, Sonora</field>
-        <field name="postcode">54321</field>
-        <field name="expected_price">13000</field>
+        <field name="description">Aliens sometimes come visit</field>
+        <field name="postcode">----</field>
+        <field name="date_availability">2030-12-31</field>
+        <field name="expected_price">45890000</field>
+        <field name="property_type_id" ref="property_industrial"/>
+        <field name="salesperson_id" ref="base.user_admin"/>
+    </record>
+
+    <record id="cabin" model="estate.property">
+        <field name="name">Cozy Cabin</field>
+        <field name="state">new</field>
+        <field name="description">Small cabin by lake</field>
+        <field name="postcode">10000</field>
+        <field name="date_availability">2020-01-01</field>
+        <field name="expected_price">80000</field>
         <field name="bedrooms">1</field>
         <field name="living_area">10</field>
         <field name="facades">4</field>
         <field name="garage">False</field>
+        <field name="garden">True</field>
         <field name="property_type_id" ref="property_residential"/>
-        <field name="offer_ids" eval="[
-            Command.create({'partner_id': 13, 'price': 12000}),
-        ]"/>
-    </record>-->
+        <field name="salesperson_id" ref="base.user_admin"/>
+    </record>
 
 </odoo>
