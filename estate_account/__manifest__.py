@@ -5,5 +5,8 @@
         'account',
         'estate',
     ],
+    'data': [
+        'report/estate_reports.xml'
+    ],
     'application': True,
 }
