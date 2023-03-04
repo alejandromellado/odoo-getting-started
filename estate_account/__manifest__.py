@@ -1,5 +1,7 @@
 {
     'name': "Real Estate Invoice",
+    'author': 'Vauxoo',
+    'license': 'LGPL-3',
     'depends': [
         'base',
         'account',
